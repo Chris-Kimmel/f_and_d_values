@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 '''
 f_and_d_values.py
 
