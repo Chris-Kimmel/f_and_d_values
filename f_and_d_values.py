@@ -7,13 +7,20 @@ CSV file.
 
 Written for the Kim Lab (Aug 9, 2021)
 
+### Usage
+
+Example:
+./f_and_d_values.py /fs/project/PAS1405/GabbyLee/project/m6A_modif/WT_cellular/23456_WT_cellular.csv output.csv
+
 This script takes two positional arguments from the command line, which are, in
 order:
     - filepath_to_read 
     - filepath_to_write
 
-The user may also wish to change the values of the constants filepath_to_read
-and filepath_to_write, which are hardcoded in this script.
+The user may also wish to change the values of the constants LOWER_THRESH and
+UPPER_THRESH, which are hardcoded in this script.
+
+### Other
 
 The results of this script will be close to the values "tombo text_output
 browser_files" would produce, but they will still differ slightly.
