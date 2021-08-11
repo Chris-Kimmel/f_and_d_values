@@ -6,10 +6,16 @@ CSV file.
 
 Written for the Kim Lab (Aug 9, 2021)
 
-The user should go to "constants for the user to customize" (a section in the
-code below) and adjust the constants before running this script. The results of
-this script will be close to the values "tombo text_output browser_files" would
-produce, but they will still differ slightly.
+This script takes two positional arguments from the command line, which are, in
+order:
+    - filepath_to_read 
+    - filepath_to_write
+
+The user may also wish to change the values of the constants filepath_to_read
+and filepath_to_write, which are hardcoded in this script.
+
+The results of this script will be close to the values "tombo text_output
+browser_files" would produce, but they will still differ slightly.
 
 Chris Kimmel
 chris.kimmel@live.com
@@ -22,19 +28,25 @@ chris.kimmel@live.com
 # pylint: disable=invalid-name,line-too-long
 
 import pandas as pd
+from sys import argv
 
 
 ################################################################################
-##################### constants for the user to customize ######################
+################################## constants ###################################
 ################################################################################
-
-# full filepaths (including .csv extensions if applicable)
-FILEPATH_TO_READ = '/fs/project/PAS1405/GabbyLee/project/m6A_modif/WT_cellular/23456_WT_cellular.csv'
-FILEPATH_TO_WRITE = 'output.csv'
 
 # These are constants in Tombo's f-value and d-value formulas.
 LOWER_THRESH = 0.05 # Tombo's default value for RNA is 0.05 for this variable.
 UPPER_THRESH = 0.40 # Tombo's default value for RNA is 0.40 for this variable.
+
+
+################################################################################
+############################ command-line arguments ############################
+################################################################################
+
+# full filepaths
+filepath_to_read = argv[1]
+filepath_to_write = argv[2]
 
 
 ################################################################################
@@ -65,7 +77,7 @@ def widify(df):
 ################################## load data ###################################
 ################################################################################
 
-wide = load_csv(FILEPATH_TO_READ)
+wide = load_csv(filepath_to_read)
 
 if not wide.index.is_unique:
     raise NotImplementedError("There is a duplicate read ID in the given file. "
@@ -103,4 +115,4 @@ results = (
 ################################## write data ##################################
 ################################################################################
 
-results.to_csv(FILEPATH_TO_WRITE, index=False)
+results.to_csv(filepath_to_write, index=False)
