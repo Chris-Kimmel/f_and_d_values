@@ -111,6 +111,10 @@ results = (
     )
     .reset_index()
     .assign(
+        frac_below_lower_thresh=lambda x: x['num_below_lower_thresh'] / x['covg'],
+        frac_above_upper_thresh=lambda x: x['num_above_upper_thresh'] / x['covg'],
+    )
+    .assign(
         f_value=lambda x: x['num_below_lower_thresh'] / (
             x['num_below_lower_thresh'] + x['num_above_upper_thresh'] ),
         d_value=lambda x: x['num_below_lower_thresh'] / (
